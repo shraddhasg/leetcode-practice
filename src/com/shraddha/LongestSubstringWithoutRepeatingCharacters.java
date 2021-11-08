@@ -1,27 +1,18 @@
 package com.shraddha;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 public class LongestSubstringWithoutRepeatingCharacters {
-    public static int uniqueCharacters(String str){
+    public static int uniqueCharacters(String str) {
         int n = str.length();
         int res = 0;
 
-        for(int i = 0; i < n; i++)
-        {
-
+        for (int i = 0; i < n; i++) {
             boolean[] visited = new boolean[256];
-
-            for(int j = i; j < n; j++)
-            {
+            for (int j = i; j < n; j++) {
                 if (visited[str.charAt(j)] == true)
                     break;
-
-                else
-                {
+                else {
                     res = Math.max(res, j - i + 1);
                     visited[str.charAt(j)] = true;
                 }
@@ -30,9 +21,9 @@ public class LongestSubstringWithoutRepeatingCharacters {
         }
 //        System.out.println(res);
         return res;
-
     }
-    public static int longestUniqueCharSubstring(String str){
+
+    public static int longestUniqueCharSubstring(String str) {
         return uniqueCharacters(str);
 //        HashSet<Character> set = new HashSet<>();
 //        for (int i = 0; i < str.length(); i++) set.add(str.charAt(i));
@@ -43,11 +34,11 @@ public class LongestSubstringWithoutRepeatingCharacters {
 //        System.out.println(str+"\n"+uniqueCharString);
     }
 
-    public static boolean isUniqueCharsInString(String str){
-        HashMap<Character,Integer> map = new HashMap<>();
-        for (int i = 0; i <str.length() ; i++) {
+    public static boolean isUniqueCharsInString(String str) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < str.length(); i++) {
             if (map.containsKey(str.charAt(i))) return false;
-            map.put(str.charAt(i),1);
+            map.put(str.charAt(i), 1);
         }
         return true;
     }
@@ -57,23 +48,24 @@ public class LongestSubstringWithoutRepeatingCharacters {
 //        ArrayList<Integer> al = new ArrayList<>();
         Set<Integer> al = new HashSet<>();
 
-        for (int i = 0; i <s.length() ; i++) {
-            for (int j = i+1; j <=s.length() ; j++) {
-                String subString = s.substring(i,j);
+        for (int i = 0; i < s.length(); i++) {
+            for (int j = i + 1; j <= s.length(); j++) {
+                String subString = s.substring(i, j);
                 if (isUniqueCharsInString(subString)) al.add(subString.length());
             }
         }
         System.out.println(al);
         Object[] arr = al.toArray();
-        return (int) arr[arr.length-1];
+        return (int) arr[arr.length - 1];
 
     }
+
     public static void main(String[] args) {
         String inputString = "abcabcbb";
-        System.out.println("Input String = "+inputString);
+        System.out.println("Input String = " + inputString);
 //        int ans = lengthOfLongestSubstring(inputString);
 //        System.out.println("Longest Substring Without Repeating Characters = "+ans);
-        int ans =longestUniqueCharSubstring(inputString);
-        System.out.println("Longest Substring Without Repeating Characters = "+ans);
+        int ans = longestUniqueCharSubstring(inputString);
+        System.out.println("Longest Substring Without Repeating Characters = " + ans);
     }
 }
