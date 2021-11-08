@@ -2,9 +2,47 @@ package com.shraddha;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 public class LongestSubstringWithoutRepeatingCharacters {
+    public static int uniqueCharacters(String str){
+        int n = str.length();
+        int res = 0;
+
+        for(int i = 0; i < n; i++)
+        {
+
+            boolean[] visited = new boolean[256];
+
+            for(int j = i; j < n; j++)
+            {
+                if (visited[str.charAt(j)] == true)
+                    break;
+
+                else
+                {
+                    res = Math.max(res, j - i + 1);
+                    visited[str.charAt(j)] = true;
+                }
+            }
+            visited[str.charAt(i)] = false;
+        }
+//        System.out.println(res);
+        return res;
+
+    }
+    public static int longestUniqueCharSubstring(String str){
+        return uniqueCharacters(str);
+//        HashSet<Character> set = new HashSet<>();
+//        for (int i = 0; i < str.length(); i++) set.add(str.charAt(i));
+//        String uniqueCharString = "";
+//       Iterator iterator = set.iterator();
+//       while (iterator.hasNext()) uniqueCharString+=iterator.next();
+//
+//        System.out.println(str+"\n"+uniqueCharString);
+    }
+
     public static boolean isUniqueCharsInString(String str){
         HashMap<Character,Integer> map = new HashMap<>();
         for (int i = 0; i <str.length() ; i++) {
@@ -31,9 +69,11 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
     }
     public static void main(String[] args) {
-        String inputString = "pwwkew";
+        String inputString = "abcabcbb";
         System.out.println("Input String = "+inputString);
-        int ans = lengthOfLongestSubstring(inputString);
+//        int ans = lengthOfLongestSubstring(inputString);
+//        System.out.println("Longest Substring Without Repeating Characters = "+ans);
+        int ans =longestUniqueCharSubstring(inputString);
         System.out.println("Longest Substring Without Repeating Characters = "+ans);
     }
 }
