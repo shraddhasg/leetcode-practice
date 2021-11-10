@@ -10,6 +10,7 @@ public class ReverseInteger {
         } catch (Exception e) {
             return 0;
         }
+      
 //        BigInteger val = new BigInteger(x);
 //        BigInteger max = new BigInteger(Integer.MAX_VALUE + "");
 //        BigInteger min = new BigInteger(Integer.MIN_VALUE + "");
