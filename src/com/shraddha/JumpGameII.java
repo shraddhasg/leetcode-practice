@@ -4,20 +4,17 @@ import java.util.Arrays;
 
 public class JumpGameII {
     public static int check(int[] arr, int currentIndex) {
-        int max = arr[currentIndex];
-        int index = currentIndex;
-        int element = max;
+        int max = Integer.MIN_VALUE;
+        int index = -1;
+        int element = arr[currentIndex];
         while (element > 0) {
             if (currentIndex + element <= arr.length - 1) {
-                if (max == arr[currentIndex + element]) {
-
-                } else {
+                if (max == arr[currentIndex + element]) ;
+                else {
                     max = Math.max(max, arr[currentIndex + element]);
-                    System.out.println("max = " + max);
                     if (max == arr[currentIndex + element]) index = currentIndex + element;
                 }
             }
-            System.out.println("Index = " + index);
             System.out.println("element = " + element);
             element--;
             System.out.println("element*** = " + element);
@@ -25,6 +22,7 @@ public class JumpGameII {
         System.out.println(index);
         return index;
     }
+
 
     public static int jump(int[] nums) {
         if (nums.length == 0 || nums.length == 1) return 0;
