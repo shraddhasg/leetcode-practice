@@ -2,9 +2,52 @@ package com.shraddha;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class MergeIntervals {
-    public static void merge(int[][] intervals) {
+    public static int[][] merge(int[][] arr) {
+        if (arr.length == 1 || arr.length == 0) return arr;
+
+        ArrayList<Integer> al = new ArrayList<>();
+        ArrayList<int[]> temp = new ArrayList<>();
+
+        al.add(arr[0][0]);
+        al.add(arr[0][1]);
+
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i][1] < arr[i - 1][0]) {
+                temp.add(arr[i - 1]);
+                temp.add(arr[i]);
+                al.clear();
+                continue;
+            }
+
+            al.add(arr[i][0]);
+            al.add(arr[i][1]);
+            Collections.sort(al);
+
+            if (al.get(1) != arr[i - 1][1]) {
+                temp.add(new int[]{al.get(0), al.get(al.size() - 1)});
+//                al.clear();
+            } else if (al.get(1) == al.get(2)) {
+                temp.add(new int[]{al.get(0), al.get(al.size() - 1)});
+//                al.clear();
+            } else {
+                if (i == 1) temp.add(arr[0]);
+                temp.add(arr[i]);
+            }
+        }
+        System.out.println("*************");
+        for (int[] a : temp) System.out.println(Arrays.toString(a));
+
+        int[][] ans = new int[temp.size()][2];
+        for (int i = 0; i < temp.size(); i++) ans[i] = temp.get(i);
+
+//        merge(ans);
+        return ans;
+    }
+
+    public static void merge1(int[][] intervals) {
         ArrayList<int[]> al = new ArrayList<>();
         int[] arr = new int[2];
         int start = intervals[0][0];
@@ -39,9 +82,11 @@ public class MergeIntervals {
     }
 
     public static void main(String[] args) {
-        int[][] arr = {{1, 3}, {2, 6}, {8, 10}, {15, 18}};
+        int[][] arr = {{1, 4}, {0, 2}, {3, 5}};
         System.out.println("Input intervals = ");
         for (int[] a : arr) System.out.println(Arrays.toString(a));
-        merge(arr);
+        int[][] ans = merge(arr);
+        System.out.println("After merging intervals = ");
+        for (int[] a : ans) System.out.println(Arrays.toString(a));
     }
 }
